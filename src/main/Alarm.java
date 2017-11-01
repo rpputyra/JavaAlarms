@@ -23,6 +23,7 @@ public class Alarm {
 	double currentTime;
 	int date;
 	boolean playing;
+	boolean snooze;
 	String message;
 	int numSnoozes;
 	
@@ -40,29 +41,32 @@ public class Alarm {
 	public void playSoundFile() {
 
 
-		try {
+		if ( !playing ) {
 			
-			File f = new File("./" + soundFile);
-		    AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());  
-		    clip = AudioSystem.getClip();
-		    clip.open(audioIn);
-		    clip.loop( 15 );
-		    
-		} catch ( LineUnavailableException e ) {
-			// TODO Auto-generated catch block
-			System.out.println( "Exception Caught 1: LineUnavailableException" );
-			e.printStackTrace();
-		} catch ( UnsupportedAudioFileException e ) {
-			// TODO Auto-generated catch block
-			System.out.println( "Exception Caught 2: UnsupportedAudioFileException" );
-			e.printStackTrace();
-		} catch ( IOException e ) {
-			// TODO Auto-generated catch block
-			System.out.println( "Exception Caught 3: IOException" );
-			e.printStackTrace();
+			try {
+				
+				File f = new File("./" + soundFile);
+			    AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());  
+			    clip = AudioSystem.getClip();
+			    clip.open(audioIn);
+			    clip.loop( 15 );
+			    
+			} catch ( LineUnavailableException e ) {
+				// TODO Auto-generated catch block
+				System.out.println( "Exception Caught 1: LineUnavailableException" );
+				e.printStackTrace();
+			} catch ( UnsupportedAudioFileException e ) {
+				// TODO Auto-generated catch block
+				System.out.println( "Exception Caught 2: UnsupportedAudioFileException" );
+				e.printStackTrace();
+			} catch ( IOException e ) {
+				// TODO Auto-generated catch block
+				System.out.println( "Exception Caught 3: IOException" );
+				e.printStackTrace();
+			}
+			
+			playing = true;
 		}
-		
-		playing = true;
 		
 	}
 
@@ -74,25 +78,28 @@ public class Alarm {
 		if ( playing ) {
 			
 			dismiss();
-			
 			//I don't link how this works it freezes up the whole JFrame for the extent of the pause. 
 			try {
-				Thread.sleep( 180000 );
+				Thread.sleep( 10000 );
 			} catch ( InterruptedException e ) {
 	
 				e.printStackTrace();
 			}
-			clip.loop( 15 );
+
+			playSoundFile();
 			
-			playing = true;
 		}
 	}
 
-	//call to dismiss alarm sound
+	//call to dismiss alarm sound 
+	//(side note I tried using clip.isActive and it threw an error if clip hadn't been instantiated yet so I'm sticking with the bool for now)
 	public void dismiss() {
 		
-		clip.stop();
-		playing = false;
+		if ( playing) {
+			clip.stop();
+			playing = false;
+		}
+		
 		
 	}
 }
