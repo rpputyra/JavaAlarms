@@ -123,24 +123,26 @@ public class JEntity extends JFrame {
 		
 		
 		//Add Alarms to AlarmSide
-		alarmPanel = addAlarms(alarmPanel);
+		addAlarms( );
 		alarmPanel.add( alarmSide );
+		
 		
 	}
 	
-	private JPanel addAlarms( JPanel panel ){
+	//TODO: this whole thing is broken
+	private void addAlarms( ){
 		
-		
+		System.out.println("Alarms");
 		//bring in alarms using 
 		for (int i = 0; i < AlarmsDriver.alarmList.size(); i++) {
 			
 			JButton alarmLabel = new JButton( AlarmsDriver.alarmList.get(i).getAlarmName() );
+			System.out.println( "ALAMRAFDs" + AlarmsDriver.alarmList.get(i).getAlarmName());
 			alarmLabel.addActionListener( alarmsListener );
 			
-			panel.add(alarmLabel);
+			alarmPanel.add(alarmLabel);
 			
 		}
-		return panel;
 		
 	}
 }
