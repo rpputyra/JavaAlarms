@@ -1,8 +1,7 @@
 package main;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.*;
+
 
 /**
 The alarm will compare values between current* and set*. The values of current* will be set by
@@ -11,7 +10,7 @@ The alarm will compare values between current* and set*. The values of current* 
  **/
 public class specificAlarm extends Alarm {
     int currentYear, currentMonth, currentDay, currentHour, currentMinute, currentSecond;
-
+    int alarmYear, alarmMonth, alarmDay, alarmHour, alarmMinute, alarmSecond;
 
     LocalDateTime timepoint = LocalDateTime.now();
 
@@ -50,7 +49,7 @@ public class specificAlarm extends Alarm {
         return hour;
     }
     public void setCurrentHour(int time) {
-        this.currentTime = time;
+        this.currentHour = time;
     }
 
     public int getCurrentMinute(){
@@ -69,6 +68,61 @@ public class specificAlarm extends Alarm {
         this.currentSecond = second;
     }
 
+    public int getAlarmYear(){
+        int year = this.alarmYear;
+        return year;
+    }
+
+    public void setAlarmYear(int alarmYear){
+        this.alarmYear = alarmYear;
+    }
+
+    public int getAlarmMonth(){
+        int month = this.alarmMonth;
+        return month;
+    }
+
+    public void setAlarmMonth(int month){
+        this.alarmMonth = month;
+    }
+
+    public int getAlarmDay(){
+        int day = this.alarmDay;
+        return day;
+    }
+
+    public void setAlarmDay(int day){
+        this.alarmDay = day;
+    }
+
+    public int getAlarmHour(){
+        int hour = this.alarmHour;
+        return hour;
+    }
+
+    public void setAlarmHour(int hour){
+        this.alarmHour = hour;
+    }
+
+    public int getAlarmMinute(){
+        int minute = this.alarmMinute;
+        return minute;
+    }
+
+    public void setAlarmMinute(int minute){
+        this.alarmMinute = minute;
+    }
+
+    public int getAlarmSecond(){
+        int second = this.alarmSecond;
+        return second;
+    }
+
+    public void setAlarmSecond(int second){
+        this.alarmSecond = second;
+    }
+
+
     public static void main(String[] args) {
         specificAlarm alarm = new specificAlarm();
 
@@ -78,6 +132,6 @@ public class specificAlarm extends Alarm {
         System.out.println(alarm.getCurrentHour());
         System.out.println(alarm.getCurrentMinute());
         System.out.println(alarm.getCurrentSecond());
-
+        
     }
 }
